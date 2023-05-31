@@ -1,3 +1,7 @@
-.temp-style {
-    
+*::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #212d50;
 }

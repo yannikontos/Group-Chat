@@ -1,25 +1,29 @@
 import { Center, Container, Flex, Heading, Stack, Avatar, AvatarBadge, Text, Box, Button, ButtonGroup  } from '@chakra-ui/react';
 import { FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/react'
-import { useState } from 'react';
-import { IoPaperPlaneOutline, IoCall } from "react-icons/io5";
-import { BsSun, BsFillCameraVideoFill } from "react-icons/bs";
+import { useEffect, useRef, useState } from 'react';
 import ThemeButton  from "./compnents/ThemeButton"
+import PostMessage from './compnents/PostMessage';
 import "./styles.css"; 
 
 function App() {
+  const dummySpan = useRef();
+  
+  useEffect(() => {
+    dummySpan.current.scrollIntoView({ behaviour: 'smooth' });
+  })
   
   return (
     <>
-      <Center h='100vh' >
-        <Container w={[400, 350, 500]} boxShadow='rgba(0, 0, 0, 0.500) 0 2px 8px' borderRadius='4px' p={5}>
-            <Flex flexDir='row' flexWrap='wrap' justifyContent='space-evenly' gap={6} p={4}  borderRadius='4px' boxShadow='rgba(0, 0, 0, 0.500) 0 2px 8px'>
+      <Center h='100vh'>
+        <Box maxW='600px' w='95%' backgroundColor='#171923' boxShadow='rgba(0, 0, 0, 0.500) 0 2px 8px' borderRadius='4px'>
+            <Flex flexDir='row' flexWrap='wrap' placeContent={{base: 'center', md: 'flex-start'}} gap={6} p={4}  borderRadius='4px' boxShadow='rgba(0, 0, 0, 1) 0 2px 1rem'>
               <Avatar name='Yannis Kontos'src='/imgs/pfp.webp' boxSize='80px'>
                   <AvatarBadge bg='green.400' borderColor='white' boxSize='1.25em'  />
               </Avatar>
               
-              <Stack direction='column' textShadow='0 0 .1rem #00000094' fontWeight='light'>
+              <Stack direction='column' textShadow='0 0 .1rem #00000094'  fontWeight='light'>
                 <Heading fontSize='1.75rem'>
-                  <Text>Yannis Kontos</Text>
+                  <Text color='#ffffff'>Yannis Kontos</Text>
                 </Heading>
 
                 <Heading size='md' fontWeight='semibold'>
@@ -27,43 +31,39 @@ function App() {
                 </Heading>
               </Stack>
               
-              <ButtonGroup alignItems='center'>
-                <Button>
-                  <BsFillCameraVideoFill />
-                </Button>
-
-                <Button>
-                  <IoCall />
-                </Button>
-              </ButtonGroup>
             </Flex>
 
-            <Box mt='2' p={3} boxShadow='rgba(0, 0, 0, 0.500) 0 2px 8px' borderRadius='0 0 4px 4px'>
-
-            <Flex direction='column-reverse'  h={['50vh', 350, 500]} >
-              <Text>chat messages will go here</Text>
+            <Box>
+            <Flex direction='column-reverse' height='60vh' overflowY='scroll' wordBreak='break-word' gap={{ base: '2em', md:'3.4em', lg:'2em'}} p={4}>
+              <Text bg='blue.400' borderRadius='10px 10px 0 10px' p='2' alignSelf='end'>chat messages will go here</Text>
+              <Text bg='blue.400' borderRadius='10px 10px 0 10px' p='2' alignSelf='end'>hello world</Text>
+              <Text bgColor='green.400' w='calc(100% - 25px)' borderRadius='10px 10px 10px 0' alignSelf='start' p='2'>Hello my boy Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi voluptas libero veniam rem distinctio? Placeat commodi necessitatibus consectetur quis sunt molestiae quia consequuntur dignissimos eius adipisci, officia a officiis itaque!</Text>
+              <Text bgColor='green.400' w='calc(100% - 25px)' borderRadius='10px 10px 10px 0' alignSelf='start' p='2'>Hello my boy Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi voluptas libero veniam rem distinctio? Placeat commodi necessitatibus consectetur quis sunt molestiae quia consequuntur dignissimos eius adipisci, officia a officiis itaque!</Text>
+              <Text bgColor='green.400' w='calc(100% - 25px)' borderRadius='10px 10px 10px 0' alignSelf='start' p='2'>Hello my boy Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi voluptas libero veniam rem distinctio? Placeat commodi necessitatibus consectetur quis sunt molestiae quia consequuntur dignissimos eius adipisci, officia a officiis itaque!</Text> 
             </Flex>
 
-            <FormControl mt='5' borderRadius='4px' >
 
-              <ButtonGroup position='absolute' right='0' borderRadius='full' margin='.5em .7em 0 0' cursor='pointer' zIndex={2}>
+              <FormControl bottom='0' mt='2' borderRadius='4px'>
 
-              <ThemeButton />
+                <ButtonGroup position='absolute' right='0' borderRadius='full' margin='.5em .7em 0 0' cursor='pointer' zIndex={2}>
 
-              <Button size='md'>
-                <IoPaperPlaneOutline/>
-              </Button>
+                <ThemeButton />
 
-              </ButtonGroup>
+                <PostMessage />
 
-              <Input type='text' border='1px solid grey' boxShadow='rgba(0, 0, 0, 0.500) 0 2px 8px' placeholder='Send A Message...' h='3.5em' p={4} borderRadius='4px'/>
-            </FormControl>
-            
+                </ButtonGroup>
+
+                <Input type='text' h='3.5em' p={4} color='#ffffff' _focusVisible='none' backgroundColor='#1A202C' placeholder='Send A Message...' borderRadius='4px'/>
+
+                <span ref={dummySpan}></span>
+              </FormControl>
             </Box>
-        </Container> 
+
+        </Box> 
       </Center>
     </>
     )
+
 }
 
 export default App

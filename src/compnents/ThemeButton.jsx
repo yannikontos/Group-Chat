@@ -6,14 +6,12 @@ function ThemeButton() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <> 
-      <IconButton size='md' onClick={toggleColorMode}
-          aria-label='Toggle Theme'
-          icon={
-            colorMode === "dark" ? <BsSun /> : <HiOutlineMoon />
-          }
-      />
-    </>
+    <IconButton size='md' onClick={toggleColorMode}
+      aria-label='Toggle Theme'
+        icon={
+          colorMode === "dark" ? <BsSun /> : <HiOutlineMoon />
+        }
+    />
   );
 }
 
