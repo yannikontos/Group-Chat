@@ -1,8 +1,8 @@
-import { useColorMode, IconButton, Button } from "@chakra-ui/react";
+import { useColorMode, IconButton } from "@chakra-ui/react";
 import { BsSun } from "react-icons/bs";
 import { HiOutlineMoon } from "react-icons/hi";
 
-function ThemeButton() {
+export function ThemeButton() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -14,5 +14,3 @@ function ThemeButton() {
     />
   );
 }
-
-export default ThemeButton;
