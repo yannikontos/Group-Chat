@@ -31,7 +31,7 @@ import { firebaseConfig } from './FirebaseConfig';
 
     return (
       <>
-        <Center h='100vh' w='100%' zIndex='3' position='absolute' bg='#171923'>
+        <Center h='100vh' w='100%' zIndex='3' position='absolute'>
         <Flex direction='column' alignItems='center' w='100%' margin='auto' gap={5}>
         <IoLogoFirebase fontSize='2.5rem' />
 

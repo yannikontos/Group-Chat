@@ -22,13 +22,13 @@ export function Chat() {
       <Center h='100svh'>
         <Box maxW='600px' w='95%' backgroundColor='#171923' boxShadow='rgba(0, 0, 0, 0.500) 0 2px 8px' borderRadius='4px'>
           <Flex flexDir='row' flexWrap='wrap' placeContent={{base: 'center', md: 'flex-start'}} gap={6} p={4}  borderRadius='4px' boxShadow='rgba(0, 0, 0, 0.500) 0 0 8px'>
-            <Avatar name='Yannis Kontos'src='/imgs/pfp.webp' boxSize={{base :'50px', md:'80px'}}>
+            <Avatar name='Group Chat' src='' boxSize={{base :'50px', md:'80px'}}>
                 <AvatarBadge bg='green.400' borderColor='white' boxSize='20px'  />
             </Avatar>
             
             <Stack direction='column' textShadow='0 0 .1rem #00000094'  fontWeight='light'>
               <Heading>
-                <Text color='#ffffff' fontSize={{ base: '1.2rem', md: '1.9rem', lg: '1.8rem'}}>Yannis Kontos</Text>
+                <Text color='#ffffff' fontSize={{ base: '1.2rem', md: '1.9rem', lg: '1.8rem'}}>Group Chat</Text>
                 <Text mt={1.5} fontWeight='normal'fontSize={{ base: '1.2rem', md: '1.6rem', lg: '1.6rem'}} color='green.300'>Online</Text>
               </Heading>
 

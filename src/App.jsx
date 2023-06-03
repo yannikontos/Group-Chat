@@ -10,16 +10,19 @@ import "./styles.css";
 import { Firestore, getFirestore } from 'firebase/firestore';
 import { collection } from 'firebase/firestore';
 
+
 function App() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const [user] = useAuthState(auth); 
-  const db = getFirestore();
-  const chatMessagesRef = collection(db, 'messages'); 
-  console.log(db)
 
-  function sendMessage() {
+  
+  function HandleGroupChat() {
+    const db = getFirestore();
+    const chatMessagesRef = collection(db, 'messages'); 
+
   }
+  HandleGroupChat();
 
   return (
     <Box>
