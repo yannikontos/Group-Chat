@@ -1,16 +1,8 @@
 import { Center, Flex, Heading, Stack, Avatar, AvatarBadge, Text, Box, Button, ButtonGroup, IconButton, FormControl, Input, Spacer, Image  } from '@chakra-ui/react';
-import { useEffect, useRef } from 'react';
-import { PostMessage } from './PostMessage';
 import { LogOut } from './LogOut';
-import { ThemeButton } from './ThemeButton';
+import { HandleGroupChat } from './HandleGroupChat';
 
 export function Chat() {
-    const dummySpan = useRef();
-  
-  useEffect(() => {
-    dummySpan.current.scrollIntoView({ behaviour: 'smooth' });
-  });
-
   function randomizeColors() {
     let colorGeneration = `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
     return colorGeneration;
@@ -70,17 +62,8 @@ export function Chat() {
               </Heading>
               </Flex>
 
-                <FormControl bottom='0' mt='2' borderRadius='4px'>
+              <HandleGroupChat />
 
-                  <ButtonGroup position='absolute' right='0' borderRadius='full' margin='.5em .7em 0 0' cursor='pointer' zIndex={2}>
-                    <ThemeButton />
-                    <PostMessage />
-                  </ButtonGroup>
-
-                  <Input type='text' h='3.5em' p={4} color='#ffffff' _focusVisible='none' backgroundColor='#1A202C' placeholder='Send A Message...' borderRadius='4px'/>
-
-                  <span ref={dummySpan}></span>
-                </FormControl>
             </Box>
 
         </Box> 

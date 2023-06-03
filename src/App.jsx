@@ -5,10 +5,8 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { firebaseConfig } from './components/FirebaseConfig';
-import { Chat } from './components/Chat';
+import { Chat } from './components/ChatroomLayout';
 import "./styles.css"; 
-import { Firestore, getFirestore } from 'firebase/firestore';
-import { collection } from 'firebase/firestore';
 
 
 function App() {
@@ -16,13 +14,6 @@ function App() {
   const auth = getAuth(app);
   const [user] = useAuthState(auth); 
 
-  
-  function HandleGroupChat() {
-    const db = getFirestore();
-    const chatMessagesRef = collection(db, 'messages'); 
-
-  }
-  HandleGroupChat();
 
   return (
     <Box>
