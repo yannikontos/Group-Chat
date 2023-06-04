@@ -7,7 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { firebaseConfig } from './components/FirebaseConfig';
 import { Chat } from './components/ChatroomLayout';
 import "./styles.css"; 
-
+import { SubmitMessage } from './components/SubmitMessage';
 
 function App() {
   const app = initializeApp(firebaseConfig);
@@ -16,9 +16,12 @@ function App() {
 
 
   return (
-    <Box>
-      { user ? <Chat /> : <DisplayLogin /> }
-    </Box>
+    <>
+      <Box>
+        { user ? <Chat /> : <DisplayLogin /> }
+      </Box>
+    <SubmitMessage />
+    </>
   )
 } 
 
