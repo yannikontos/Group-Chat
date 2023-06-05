@@ -5,24 +5,76 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { firebaseConfig } from './components/FirebaseConfig';
-import { Chat } from './components/ChatroomLayout';
+import { LogOut } from './components/LogOut';
+import { HandleGroupChat } from './components/HandleGroupChat';
+import { DisplayMessage } from './components/DisplayMessage';
 import "./styles.css"; 
-import { SubmitMessage } from './components/SubmitMessage';
+import { getFirestore, collection, getDocs, query } from 'firebase/firestore';
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const q = query(collection(db, 'chat-room'));
+const querySnapshot = await getDocs(q);
 
 function App() {
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
   const [user] = useAuthState(auth); 
+  const data = [];
 
+  querySnapshot.forEach(doc => {
+    data.push(doc.data())
+  });
+  
+    function ChatroomLayout() {
+      
 
-  return (
-    <>
-      <Box>
-        { user ? <Chat /> : <DisplayLogin /> }
-      </Box>
-    <SubmitMessage />
-    </>
-  )
-} 
+      return (
+        <>
+        <Center h='100svh'>
+          <Box maxW='600px' w='95%' backgroundColor='#171923' boxShadow='rgba(0, 0, 0, 0.500) 0 2px 8px' borderRadius='4px'>
+            <Flex flexDir='row' flexWrap='wrap' placeContent={{base: 'center', md: 'flex-start'}} gap={6} p={4}  borderRadius='4px' boxShadow='rgba(0, 0, 0, 0.500) 0 0 8px'>
+              <Avatar name='Group Chat' src='' boxSize={{base :'50px', md:'80px'}}>
+                  <AvatarBadge bg='green.400' borderColor='white' boxSize='20px'  />
+              </Avatar>
+              
+              <Stack direction='column' textShadow='0 0 .1rem #00000094'  fontWeight='light'>
+                <Heading>
+                  <Text color='#ffffff' fontSize={{ base: '1.2rem', md: '1.9rem', lg: '1.8rem'}}>Group Chat</Text>
+                  <Text mt={1.5} fontWeight='normal'fontSize={{ base: '1.2rem', md: '1.6rem', lg: '1.6rem'}} color='green.300'>Online</Text>
+                </Heading>
+
+              </Stack>
+
+              <Spacer />
+              
+              <ButtonGroup>
+              <LogOut />
+              </ButtonGroup>
+
+            </Flex>
+
+            <Box>
+                <Flex direction='column-reverse' height='60svh' overflowY='scroll' overflowX='hidden'  gap={{ base: '2em', md:'3.4em', lg:'2em'}} p={4}>
+                  {data.length > 0 ? <DisplayMessage /> : console.log("enter a message")}
+                </Flex>
+
+                <HandleGroupChat />
+
+              </Box>
+
+          </Box> 
+        </Center>
+      </>
+      )
+    }
+
+    return (
+      <>
+        <Box>
+          { user ? ChatroomLayout() : <DisplayLogin /> }
+        </Box>
+      </>
+    )
+  }
 
 export default App

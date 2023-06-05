@@ -1,7 +1,7 @@
 import { FormControl, Input, ButtonGroup, IconButton, Button  } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from 'react';
 import { ThemeButton } from "./ThemeButton";
-import { Firestore, getFirestore, collection, doc, setDoc, Timestamp, serverTimestamp } from 'firebase/firestore';
+import { Firestore, getFirestore, collection, doc, addDoc, Timestamp, serverTimestamp, getDocs } from 'firebase/firestore';
 import { IoPaperPlaneOutline } from "react-icons/io5";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./FirebaseConfig";
@@ -12,12 +12,10 @@ export function HandleGroupChat() {
     const dummySpan = useRef();
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const db = getFirestore();
-    const chatMessagesRef = collection(db, 'messages'); 
+    const db = getFirestore(app);
+    const chatMessagesRef = collection(db, 'chat-room'); 
     const [inputValue, setInputValue] = useState('');
-    let total = 0;
 
-    
     useEffect(() => {
         dummySpan.current.scrollIntoView({ behaviour: 'smooth' });
     });
@@ -25,17 +23,17 @@ export function HandleGroupChat() {
     const sendMessage = async (e) =>  {
         const { uid, photoURL, displayName } = auth.currentUser;
         e.preventDefault();
-        total += 1;
 
-         setDoc(doc(db, "chat-room", `message${total}`), {
+
+          addDoc(chatMessagesRef, {
             formMessage: inputValue,
             timeSent: serverTimestamp(),
             displayName,
             photoURL,
             uid,
           });
-          setInputValue('');
-          console.log(total);
+          
+        setInputValue('');
     };
 
     return (
