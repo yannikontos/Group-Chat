@@ -10,24 +10,22 @@ import { HandleGroupChat } from './components/HandleGroupChat';
 import { DisplayMessage } from './components/DisplayMessage';
 import "./styles.css"; 
 import { getFirestore, collection, getDocs, query } from 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const q = query(collection(db, 'chat-room'));
-const querySnapshot = await getDocs(q);
+const collectionRef = firebase.firestore().collection('chat-room');
+const query2 =  collectionRef.orderBy('timeSent').limit(1);
 
 function App() {
   const [user] = useAuthState(auth); 
-  const data = [];
+  const [sentMessages] = useCollectionData(query2, { idField: 'id' });
 
-  querySnapshot.forEach(doc => {
-    data.push(doc.data())
-  });
-  
     function ChatroomLayout() {
-      
-
       return (
         <>
         <Center h='100svh'>
@@ -54,13 +52,13 @@ function App() {
             </Flex>
 
             <Box>
-                <Flex direction='column-reverse' height='60svh' overflowY='scroll' overflowX='hidden'  gap={{ base: '2em', md:'3.4em', lg:'2em'}} p={4}>
-                  {data.length > 0 ? <DisplayMessage /> : console.log("enter a message")}
+                <Flex height='60svh' overflowY='scroll' overflowX='hidden' direction='column-reverse' p={4}>
+                  {sentMessages && sentMessages.map(message => <DisplayMessage key={message.id} />)}
                 </Flex>
 
                 <HandleGroupChat />
 
-              </Box>
+            </Box>
 
           </Box> 
         </Center>
