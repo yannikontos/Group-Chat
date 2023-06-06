@@ -1,7 +1,7 @@
 # Group-Chat
 ### How To Run 
-> `git clone` this repo <br>
-> `[npm] (https://www.npmjs.com/) i` <br> 
+> ```git clone``` this repo <br>
+> `[npm](https://www.npmjs.com/) i` <br> 
 > `npm run dev` 
 <br> 
 
