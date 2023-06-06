@@ -1,11 +1,11 @@
 # Group-Chat
-##How To Run 
+## How To Run 
 > `git clone` this repo <br>
 > `[npm] (https://www.npmjs.com/) i` <br> 
 > `npm run dev` 
 <br> 
 
-##Project Screenshots
+## Project Screenshots
 Login Page :
 <br> 
 <img width="470" alt="Screenshot 2023-06-06 at 12 34 57 PM" src="https://github.com/yannikontos/Group-Chat/assets/90143712/1f2c198a-28de-4108-85c2-7d6210377a66">
