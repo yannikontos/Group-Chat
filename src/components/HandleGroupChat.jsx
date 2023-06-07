@@ -1,7 +1,7 @@
-import { FormControl, Input, ButtonGroup, IconButton, Button  } from "@chakra-ui/react";
+import { FormControl, Input, ButtonGroup, IconButton } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from 'react';
 import { ThemeButton } from "./ThemeButton";
-import { Firestore, getFirestore, collection, doc, addDoc, Timestamp, serverTimestamp, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { IoPaperPlaneOutline } from "react-icons/io5";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./FirebaseConfig";
@@ -28,6 +28,7 @@ export function HandleGroupChat() {
           addDoc(chatMessagesRef, {
             formMessage: inputValue,
             timeSent: serverTimestamp(),
+            docId: crypto.randomUUID(),
             displayName,
             photoURL,
             uid,

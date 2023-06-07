@@ -1,10 +1,8 @@
 import { Center, Flex, Heading, Text, Button  } from '@chakra-ui/react';
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore/lite';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
 import { IoLogoFirebase } from "react-icons/io5";
-import { useCollection } from 'react-firebase-hooks/firestore';
 import { firebaseConfig } from './FirebaseConfig';
   
   const app = initializeApp(firebaseConfig);

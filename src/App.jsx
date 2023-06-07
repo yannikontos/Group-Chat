@@ -1,5 +1,5 @@
-import { Center, Flex, Heading, Stack, Avatar, AvatarBadge, Text, Box, Button, ButtonGroup, IconButton, FormControl, Input, Spacer  } from '@chakra-ui/react';
-import { useEffect, useRef, useState } from 'react';
+import { Center, Flex, Heading, Stack, Avatar, AvatarBadge, Text, Box, ButtonGroup, Spacer  } from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
 import { DisplayLogin } from './components/CheckLogin';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from "firebase/auth";
@@ -8,22 +8,32 @@ import { firebaseConfig } from './components/FirebaseConfig';
 import { LogOut } from './components/LogOut';
 import { HandleGroupChat } from './components/HandleGroupChat';
 import { DisplayMessage } from './components/DisplayMessage';
-import "./styles.css"; 
-import { getFirestore, collection, getDocs, query } from 'firebase/firestore';
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import "./styles.css"; 
+import 'firebase/compat/firestore';
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
-const q = query(collection(db, 'chat-room'));
 const collectionRef = firebase.firestore().collection('chat-room');
 const query2 =  collectionRef.orderBy('timeSent').limit(1);
 
 function App() {
   const [user] = useAuthState(auth); 
   const [sentMessages] = useCollectionData(query2, { idField: 'id' });
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+      const collectionRef = firebase.firestore().collection('chat-room');
+      const query2 = collectionRef.orderBy('timeSent', 'desc');
+
+      const unsubscribe = query2.onSnapshot((querySnapshot) => {
+          const documents = querySnapshot.docs.map((doc) => doc.data());
+          setItems(documents);
+      })
+      
+      return () => unsubscribe();
+  }, []);
 
     function ChatroomLayout() {
       return (
@@ -52,8 +62,8 @@ function App() {
             </Flex>
 
             <Box>
-                <Flex height='60svh' overflowY='scroll' overflowX='hidden' direction='column-reverse' p={4}>
-                  {sentMessages && sentMessages.map(message => <DisplayMessage key={message.id} />)}
+                <Flex height='60svh' gap={{ base: '2em', md:'3.4em', lg:'1.8em'}} overflowY='scroll' overflowX='hidden' direction='column-reverse' p={4}>
+                  {sentMessages && items.map(item => <DisplayMessage docDetails={item} key={item.docId} />)}
                 </Flex>
 
                 <HandleGroupChat />
