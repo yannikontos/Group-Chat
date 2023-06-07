@@ -13,7 +13,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import "./styles.css"; 
 import 'firebase/compat/firestore';
 
-const app = initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const collectionRef = firebase.firestore().collection('chat-room');
 const query2 =  collectionRef.orderBy('timeSent').limit(1);

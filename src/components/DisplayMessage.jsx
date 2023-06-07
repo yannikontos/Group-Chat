@@ -18,16 +18,15 @@ export function DisplayMessage(props) {
         return colorGeneration;
     };
 
-
-        return (
-            <>
-                <Heading key={docId} minW='200px' alignSelf={sentUsersUid ? 'flex-start' : 'flex-end'} backgroundColor='#5d5e602a' borderRadius={sentUsersUid ? '8px 8px 8px 0px' : '8px 8px 0px 8px'} size='md' padding={2}>
-                <Text pb={3} ml='1.5em' mr={2.5} fontSize='1.4rem' textAlign={sentUsersUid ? 'left' : 'right'} color={randomizeColors}>{displayName}</Text>
-                <Flex gap={3} ml={1} color='#ffffff' fontWeight='normal' textAlign={sentUsersUid ? 'left' : 'right'}  justifyContent={sentUsersUid  ? 'flex-start' : 'flex-end'}>
-                    <Avatar order={sentUsersUid ? 1 : 2} src={photoURL || ''} alt={displayName} w='50px' h='50px' borderRadius='full' alignSelf='center' />
-                    <Text order={sentUsersUid ? 2 : 1}>{formMessage}</Text>
-                </Flex>
-                </Heading>
-            </>
-        )
+    return (
+        <>
+            <Heading key={docId} minW='200px' maxW='490px' alignSelf={sentUsersUid ? 'flex-start' : 'flex-end'} backgroundColor='#5d5e602a' borderRadius={sentUsersUid ? '8px 8px 8px 0px' : '8px 8px 0px 8px'} size='md' padding={2}>
+            <Text pb={3} ml='1.5em' mr={2.5} fontSize='1.4rem' textAlign={sentUsersUid ? 'left' : 'right'} color={randomizeColors}>{displayName}</Text>
+            <Flex gap={3} ml={1} color='#ffffff' fontWeight='normal' textAlign={sentUsersUid ? 'left' : 'right'}  justifyContent={sentUsersUid  ? 'flex-start' : 'flex-end'}>
+                <Avatar order={sentUsersUid ? 1 : 2} src={photoURL || ''} alt={displayName} w='50px' h='50px' borderRadius='full' alignSelf='center' />
+                <Text order={sentUsersUid ? 2 : 1}>{formMessage}</Text>
+            </Flex>
+            </Heading>
+        </>
+    )
 }

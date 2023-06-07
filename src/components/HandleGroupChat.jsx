@@ -16,25 +16,23 @@ export function HandleGroupChat() {
     const chatMessagesRef = collection(db, 'chat-room'); 
     const [inputValue, setInputValue] = useState('');
 
-    useEffect(() => {
-        dummySpan.current.scrollIntoView({ behaviour: 'smooth' });
-    });
-
+    
     const sendMessage = async (e) =>  {
-        const { uid, photoURL, displayName } = auth.currentUser;
-        e.preventDefault();
-
-
-          addDoc(chatMessagesRef, {
-            formMessage: inputValue,
-            timeSent: serverTimestamp(),
-            docId: crypto.randomUUID(),
-            displayName,
-            photoURL,
-            uid,
-          });
-          
-        setInputValue('');
+      const { uid, photoURL, displayName } = auth.currentUser;
+      e.preventDefault();
+      
+      
+      addDoc(chatMessagesRef, {
+        formMessage: inputValue,
+        timeSent: serverTimestamp(),
+        docId: crypto.randomUUID(),
+        displayName,
+        photoURL,
+        uid,
+      });
+      
+      dummySpan.current.scrollIntoView({ behaviour: 'smooth' });
+      setInputValue('');
     };
 
     return (
