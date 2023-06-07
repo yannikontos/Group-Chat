@@ -1,17 +1,11 @@
-import { collection, query, getFirestore } from 'firebase/firestore';
 import { Flex, Heading, Avatar, Text } from '@chakra-ui/react';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from './FirebaseConfig';
 import { getAuth } from 'firebase/auth';
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
-const q = query(collection(db, 'chat-room'));
-firebase.initializeApp(firebaseConfig);
-
 
 export function DisplayMessage(props) {
     let displayName = props.docDetails.displayName;
